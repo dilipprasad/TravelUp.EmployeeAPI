@@ -1,0 +1,6 @@
+@TravelUp.EmployeeAPI_HostAddress = http://localhost:5198
+
+GET {{TravelUp.EmployeeAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
