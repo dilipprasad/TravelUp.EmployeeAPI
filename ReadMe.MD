@@ -23,13 +23,13 @@ This project is an ASP.NET Web API that provides RESTful endpoints for managing 
 
 ## Prerequisites
 
-1. **.NET 6.0 SDK or later**  
-   - You can download the .NET 6.0 SDK from the [Microsoft .NET Downloads](https://dotnet.microsoft.com/en-us/download) page.  
+1. **.NET 8.0 SDK or later**  
+   - You can download the .NET 8.0 SDK from the [Microsoft .NET Downloads](https://dotnet.microsoft.com/en-us/download) page.  
    - Verify the installation by running:
      ```bash
      dotnet --version
      ```
-     It should return a version number 6.x or higher.
+     It should return a version number 8.x or higher.
 
 2. **Git (optional, if you want to clone via Git)**  
    - Download and install from [Git Downloads](https://git-scm.com/downloads).
