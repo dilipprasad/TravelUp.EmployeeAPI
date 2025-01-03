@@ -140,3 +140,9 @@ For Updates
 ---
 
 
+# For Testing 
+
+Install the following packages to allow the test to be run in visual studio
+    Install-Package MSTest.TestFramework
+    Install-Package MSTest.TestAdapter
+
