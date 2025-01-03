@@ -119,7 +119,7 @@ Once the application is running, you can test the endpoints by using a browser, 
 
  ---
 
- # Inital Migration for Entity Frameowkr
+ ## Inital Migration for Entity Framework
  
   ```bash
   Cd into TravelUp.EmployeeAPI\TravelUp.Employee.Data
@@ -137,10 +137,10 @@ For Updates
   cd C:\Code\TravelUp\TravelUp.EmployeeAPI\TravelUp.EmployeeAPI
   dotnet ef database update --verbose --project C:\Code\TravelUp\TravelUp.EmployeeAPI\TravelUp.EmployeeAPI\TravelUp.Employee.Data\TravelUp.EmployeeAPI.Data.csproj --startup-project C:\Code\TravelUp\TravelUp.EmployeeAPI\TravelUp.EmployeeAPI\TravelUp.EmployeeAPI\TravelUp.EmployeeAPI.csproj
 
----
+----
 
 
-# For Testing 
+## For Testing 
 
 Install the following packages to allow the test to be run in visual studio
     Install-Package MSTest.TestFramework
