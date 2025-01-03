@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TravelUp.EmployeeAPI.Data.Exceptions;
 using TravelUp.EmployeeAPI.Data.Models;
 using TravelUp.EmployeeAPI.Data.Repository;
 
@@ -33,6 +34,11 @@ namespace TravelUp.EmployeeAPI.Controllers
                 var employees = await _employeeRepository.GetAllAsync();
                 return Ok(employees);
             }
+            catch (RepositoryException ex)
+            {
+                _logger.LogError(ex, $"An error occurred while fetching all employees");
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
+            }
             catch (Exception ex)
             {
                 _logger.LogError($"Problem in {_logTitle}GetAllEmployees",ex);
@@ -56,6 +62,11 @@ namespace TravelUp.EmployeeAPI.Controllers
             {
                 var result = await _employeeRepository.GetPaginatedAsync(pageNumber, pageSize);
                 return Ok(result);
+            }
+            catch (RepositoryException ex)
+            {
+                _logger.LogError(ex, $"An error occurred while fetching employees");
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
             }
             catch (Exception ex)
             {
@@ -81,6 +92,11 @@ namespace TravelUp.EmployeeAPI.Controllers
                     return Problem("Unable to Find Employee By Id");
 
                 return Ok(employee);
+            }
+            catch (RepositoryException ex)
+            {
+                _logger.LogError(ex, $"An error occurred while fetching employee with ID: {id}");
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
             }
             catch (Exception ex)
             {
@@ -112,6 +128,11 @@ namespace TravelUp.EmployeeAPI.Controllers
                 // Return the newly created resource, adhering to REST conventions
                 return CreatedAtAction(nameof(GetEmployeeById), new { id = createdEmployee.Id }, createdEmployee);
             }
+            catch (RepositoryException ex)
+            {
+                _logger.LogError(ex, $"An error occurred while creating employee");
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
+            }
             catch (Exception ex)
             {
                 _logger.LogError($"Problem in {_logTitle}CreateEmployee", ex);
@@ -128,6 +149,7 @@ namespace TravelUp.EmployeeAPI.Controllers
         [HttpPut("{id:guid}")]
         [ProducesResponseType(StatusCodes.Status200OK)] // For a successful response
         [ProducesResponseType(StatusCodes.Status400BadRequest)] // For a Bad Request
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)] // For Problem()
         public async Task<IActionResult> UpdateEmployee(Guid id, [FromBody] Employee updatedEmployee)
         {
             try
@@ -144,6 +166,11 @@ namespace TravelUp.EmployeeAPI.Controllers
 
                 return Ok();
             }
+            catch (RepositoryException ex)
+            {
+                _logger.LogError(ex, $"An error occurred while updating employee with ID: {id}");
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
+            }
             catch (Exception ex)
             {
                 _logger.LogError($"Problem in {_logTitle}UpdateEmployee", ex);
@@ -159,6 +186,7 @@ namespace TravelUp.EmployeeAPI.Controllers
         [HttpDelete("{id:guid}")]
         [ProducesResponseType(StatusCodes.Status200OK)] // For a successful response
         [ProducesResponseType(StatusCodes.Status400BadRequest)] // For a Bad Request
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)] // For Problem()
         public async Task<IActionResult> DeleteEmployee(Guid id)
         {
             try
@@ -171,6 +199,11 @@ namespace TravelUp.EmployeeAPI.Controllers
                     return Problem("Problem deleting employee.");
 
                 return Ok();
+            }
+            catch (RepositoryException ex)
+            {
+                _logger.LogError(ex, $"An error occurred while deleting employee with ID: {id}");
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
             }
             catch (Exception ex)
             {
